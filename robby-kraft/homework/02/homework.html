@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <style type="text/css">
+    
+   div{
+    width: 100%;
+    height: 1em;  
+  }
+
+    body, html{
+      margin: 0;
+    }
+
+  </style>
+</head>
+<body>
+
+<script type="text/javascript">
+
+
+var min = 1;
+var max = 5000;
+
+var divNumber; 
+
+var hsl;
+
+function calculateDivs () {
+  divNumber = Math.floor(Math.random() * (max - min) + 1) + min;
+  
+
+  for (var i = 0; i < divNumber; i++) {
+
+    calculateColor();
+
+    var div = document.createElement("div");
+    document.body.appendChild(div);
+
+    div.style.backgroundColor = hsl;
+    div.style.height = 100/divNumber + "vh";
+  }
+
+
+  console.log(divNumber);
+
+function calculateColor(){
+
+    var hue = Math.floor(Math.random()*360);
+    var saturation = Math.floor(Math.random()*100);
+    var lightness = Math.floor(Math.random()*100);
+    hsl = 'hsl(' + hue +',' + saturation + '%,' + lightness + '%)';
+
+}
+
+
+
+}
+
+
+
+calculateDivs();
+</script>
+
+
+</body>
+</html>
