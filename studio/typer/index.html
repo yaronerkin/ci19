@@ -1,0 +1,69 @@
+<!doctype html>
+<head>
+
+<title>speedy</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<button class="button" onclick="openFullscreen();">•</button>
+
+<script>
+var elem = document.documentElement;
+function openFullscreen() {
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.mozRequestFullScreen) { /* Firefox */
+    elem.mozRequestFullScreen();
+  } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+    elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) { /* IE/Edge */
+    elem.msRequestFullscreen();
+  }
+}
+
+
+//switch it to the tilde keycode which is 192
+
+</script>
+
+
+<style type="text/css">
+
+
+	
+	.button { 
+	font-size: 50px;
+	color: white;    
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    border-color: transparent;
+    cursor:pointer;
+    overflow: hidden;        
+}
+</style>
+
+
+<script src="js/jquery.js"></script>
+<script src="js/init.js"></script>
+
+
+<link rel="stylesheet" type="text/css" href="style.css">
+
+</head>
+
+<body>
+<div id="container" class="transform">
+<span id="cursor">|</span>
+</div>
+  
+
+</body>
+
+</html>
+
+<div id="txt"></div>
+
+
+
+
