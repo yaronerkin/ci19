@@ -34,9 +34,7 @@ $(document).ready(function() {
   		var elem = document.getElementById(entryCount);
   		//$( "div span:last-child" ).style.fontWeight = difference;
   		if (elem){
-  			//elem.style.fontWeight = difference*2;
   			elem.style.letterSpacing = difference/3 + "px";	
-  			//elem.style.wordSpacing = difference/5 + "px";	
   			elem.style.opacity = difference/90;
   		};
   		console.log(elem);

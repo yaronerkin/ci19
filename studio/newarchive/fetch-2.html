@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<style>
+	h3{
+		margin: 0px;
+	}
+</style>
+<body>
+<header id="head"></header>
+<script>
+
+var url = "https://raw.githubusercontent.com/eddiedohyunkim/ci19/master/lab/classwork/09/lottery.json"
+fetch(url)
+	.then(function(response){return response.json();})
+	.then(function(json){buildPage(json);})
+
+
+
+function buildPage(data) {
+
+	for (var i = 0; i < data.length; i += 1){
+		var event = document.createElement("h3");
+		var date = document.createElement("h3");
+		var winner = document.createElement("h3");
+
+		document.body.appendChild(event);
+		document.body.appendChild(date);
+		document.body.appendChild(winner);
+
+		event.innerHTML = "event : " + data[i].event;
+		date.innerHTML = "date : " + data[i].date;
+		winner.innerHTML = "winners : " + data[i].winner;
+		
+}
+</script>
+</body>
+</html>

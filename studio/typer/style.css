@@ -7,9 +7,9 @@
 }
 
 
-@import url("https://fonts.googleapis.com/css?family=Raleway");
+
 body {
-        font-family: 'Raleway', sans-serif;
+        font-family: 'helvetica', sans-serif;
         font-size: 72px;
         line-height: 1em;
         color: white;
