@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<title></title>
+<body>
+
+	<input type="file">
+
+</body>
+
+<script>
+
+document.querySelectorAll("input")[0].onchange = function(event) {
+	console.log(event);
+	let file = event.target.files[0]
+	var reader = new FileReader();
+	//console.log(reader);
+	reader.readAsText(file, "UTF-8");
+	reader.onload = function(readerEvent) {
+		didLoad(readerEvent.target.result);
+	}
+	
+}
+
+function didLoad(text) {
+	var json = []; // top level of json can be an array
+
+	console.log(text);
+	var lines = text.split(/\r\n|\n/);
+	console.log(lines);
+
+	var header = lines[0].split(",");
+
+	for(var i = 1; i < lines.length; i += 1) {
+		var entry = lines[i].split(",");
+		console.log(entry);
+		var object = {};
+
+		for (var j = 0; j < entry.length; j += 1 ){
+			object[ header[j] ] = entry[j];
+		}
+		
+		json.push(object);
+	}
+	
+	console.log(json);
+	console.log(json[2]);
+	download(JSON.stringify(json), "mydata.json");
+}
+
+
+
+function download(contents, filename) {
+	var a = document.createElement("a");
+	var blob = new window.Blob([contents], {type: "text/plain"});
+	a.setAttribute("href", window.URL.createObjectURL(blob));
+	a.setAttribute("download", filename);
+	document.body.appendChild(a);
+	a.click();
+	a.remove();
+}
+
+
+</script>
