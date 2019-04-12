@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+
+<style type="text/css">
+
+.youtube {
+    background-color: #000;
+    margin-bottom: 30px;
+    position: relative;
+    padding-top: 0%;
+    overflow: hidden;
+    cursor: pointer;
+}
+.youtube img {
+    width: 100%;
+    top: -16.84%;
+    left: 0;
+    opacity: 0.7;
+}
+/*.youtube .play-button {
+    width: 90px;
+    height: 60px;
+    background-color: #333;
+    box-shadow: 0 0 30px rgba( 0,0,0,0.6 );
+    z-index: 1;
+    opacity: 0.8;
+    border-radius: 6px;*/
+}
+/*.youtube .play-button:before {
+    content: "";
+    border-style: solid;
+    border-width: 15px 0 15px 26.0px;
+    border-color: transparent transparent transparent #fff;*/
+}
+.youtube img,
+.youtube .play-button {
+    cursor: pointer;
+}
+.youtube img,
+.youtube iframe,
+.youtube .play-button,
+.youtube .play-button:before {
+    position: absolute;
+}
+.youtube .play-button,
+.youtube .play-button:before {
+    top: 50%;
+    left: 50%;
+    transform: translate3d( -50%, -50%, 0 );
+}
+.youtube iframe {
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+
+</style>
+
+</head>
+<body>
+
+
+
+<!-- You can embed  multiple Youtube videos on a page -->
+<!-- <div class="youtube" id="XfDNGTVCzeQ" //style="width:560px; height: 315px;">
+</div>
+
+<div class="youtube" id="GcKkiRl9_qE" style="width:560px; height: 315px;">
+</div>
+
+<div class="youtube" id="o16CcUauSYA" style="width:560px; height: 315px;">
+</div>
+
+<div class="youtube" id="QHqAVaQqQWQ" style="width:560px; height: 315px;">
+</div>
+
+<div class="youtube" id="HQKws9cbTJQ" style="width:560px; height: 315px;">
+</div>
+
+<div class="youtube" id="atg5s65oAxg" style="width:560px; height: 315px;">
+</div> -->
+
+<!-- Include the JavaScript only once -->
+
+<script> 
+
+//still havent done it but when you double click you can make the div moveable or ondrag
+
+// Find all the YouTube video embedded on a page
+var videos = document.getElementsByClassName("youtube"); 
+
+for (var i=0; i<videos.length; i++) {
+  
+  var youtube = videos[i];
+  
+  // Based on the YouTube ID, we can easily find the thumbnail image
+  var img = document.createElement("img");
+  img.setAttribute("src", "http://i.ytimg.com/vi/" 
+                          + youtube.id + "/hqdefault.jpg");
+  img.setAttribute("class", "thumb");
+  
+
+  // Overlay the Play icon to make it look like a video player
+  //var circle = document.createElement("div");
+  //circle.setAttribute("class","circle");  
+  
+  youtube.appendChild(img);
+  //youtube.appendChild(circle);
+  
+  // Attach an onclick event to the YouTube Thumbnail
+  youtube.onclick = function() {
+
+    // Create an iFrame with autoplay set to true
+    var iframe = document.createElement("iframe");
+    iframe.setAttribute("src",
+          "https://www.youtube.com/embed/" + this.id 
+        + "?autoplay=1&autohide=1&border=0&wmode=opaque&enablejsapi=1"); 
+    
+    // The height and width of the iFrame should be the same as parent
+    iframe.style.width  = this.style.width;
+    iframe.style.height = this.style.height;
+       
+    // Replace the YouTube thumbnail with YouTube HTML5 Player
+    this.parentNode.replaceChild(iframe, this);
+
+  }; 
+}
+</script>
+
+
+</body>
+</html>
