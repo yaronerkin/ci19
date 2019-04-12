@@ -42,8 +42,8 @@
     left: 0;
 }
 
-
 </style>
+
 </head>
 <body>
 
@@ -64,46 +64,24 @@ function divMaker(entry){
 	return div
 };
 
-//<div class="youtube" id="XfDNGTVCzeQ" //style="width:560px; height: 315px;">
-//</div>
-
 //calling items from json 
 function sortData(json) {
 
 // console.log(json[0].Year);
 // console.log(json[0]["Year"]);
 
-// <iframe width="560" height="315" src= frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-var years = document.getElementById("ParentYear");
-
-
 
 for ( var i = 0; i < json.length; i = i+ 1){
+	
+	// create an if statement that will test if json entry is for the year that I need to load 
+	// function sortData(json,year) 
+
 	console.log(json[i])
 	div = divMaker(json[i])
 	document.body.appendChild(div)
 	applyYoutubeStyle(div)
 
-
-	//var year = document.createElement("h1")
-	//var video = document.createElement("iframe");
-	//video.setAttribute("frameborder", "0");
-	//video.setAttribute("src", json[i].Source );
-	//coding this out for now to make everthing load 
-	//document.body.appendChild(year);
-	//document.body.appendChild(video);
-
-	//year.innerHTML = json[i].Year;
-	// video.innerHTML = ;
-
-	//console.log(json[i].Year);
-	//document.body.appendChild(Year);
-	//Year.innerHTML = data[i].Year;
-	
-
 	}
-
 
 }
 
@@ -117,10 +95,6 @@ function applyYoutubeStyle(youtube){
                           + youtube.id + "/hqdefault.jpg");
   img.setAttribute("class", "thumb");
   
-
-  // Overlay the Play icon to make it look like a video player
-  //var circle = document.createElement("div");
-  //circle.setAttribute("class","circle");  
   
   youtube.appendChild(img);
   //youtube.appendChild(circle);
@@ -145,13 +119,12 @@ function applyYoutubeStyle(youtube){
 }
 
 // Find all the YouTube video embedded on a page
-var videos = document.getElementsByClassName("youtube"); 
+//var videos = document.getElementsByClassName("youtube"); 
 
-for (var i=0; i<videos.length; i++) {
+//for (var i=0; i<videos.length; i++) {
   
-  
-}
-
+ 
+//}
 
 
 </script>
