@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<style type="text/css">
+
+
+	
+html,body{
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	margin: 0;
+
+}
+
+
+</style>
+</head>
+<body>
+
+<h1 id = "hex-color"></h1>
+
+<script type="text/javascript">
+
+//0123456789ABCDEF
+// #123456 = #12 34 56 = #RED GREEN BLUE
+	
+//our goal is to create a random hex color 
+// like this: #23324 this will be a string
+
+var choices = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B","C","D","E","F"];
+
+console.log(choices);
+
+console.log(choices[Math.floor(Math.random()*16)]);
+
+//*16 stretches the math.random from 0 to 1 > 0 to 16
+
+// math.floor takes anynumber with a decimal and takes out the decimal from 16.9485179287 to 16
+
+var hexColor = "#";
+
+hexColor = hexColor + choices[Math.floor(Math.random()*16)];
+hexColor = hexColor + choices[Math.floor(Math.random()*16)];
+hexColor = hexColor + choices[Math.floor(Math.random()*16)];
+hexColor = hexColor + choices[Math.floor(Math.random()*16)];
+hexColor = hexColor + choices[Math.floor(Math.random()*16)];
+hexColor = hexColor + choices[Math.floor(Math.random()*16)];
+
+//hex colors are 6 so it shows colors 
+
+console.log(hexColor);
+
+// shows color code in code
+
+document.body.style.backgroundColor = hexColor;
+
+//displays background color equaling to hexcolor code
+
+document.querySelector("#hex-color").innerHTML = hexColor;
+
+// displays hex color code in document 
+
+</script>
+</body>
+</html>

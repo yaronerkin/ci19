@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<script type="text/javascript">
+	
+// load our json file.
+var url = "https://raw.githubusercontent.com/robbykraft/Core-Interaction/master/lab/09/water.json"
+fetch(url)
+	.then(function(response){return.response.json()})
+	.then(function(json){console.log(json);})
+
+</script>
+</body>
+</html>

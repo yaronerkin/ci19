@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Will today be a good day?</title>
+<style type="text/css">
+
+html,body{
+	height: 100%
+}
+
+body{
+	display: flex;
+	margin: 0;
+	justify-content: center;
+	align-items: center;
+}
+
+h1{
+	/* either vw or vh, whichever is smaller */
+	font-size: 20vmin
+}
+
+</style>
+</head>
+<body>
+<h1></h1>
+
+<script type="text/javascript">
+var headers = document.
+	querySelectorAll("h1");	
+console.log(headers);
+
+var headers = headers[0];
+
+
+if(Math.random() <.5){
+	headers.innerHTML = "yes";
+} else {
+	headers.innerHTML = "no";
+}
+
+
+</script>
+</body>
+</html>

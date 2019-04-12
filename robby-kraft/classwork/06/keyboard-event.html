@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<script type="text/javascript">
+
+
+// define code here and the browser runs it for you
+//document/onkeypress only does characters while onkeydown does everything
+
+		var typewriter = "";
+
+		document.onkeydown = function(event){
+			console.log(event);
+			typewriter = typewriter + event.key;
+			document.body.innerHTML = typewriter;
+
+		if(event.key == "z"){
+			document.body.style.backgroundColor = "green";
+		}
+		
+
+		}
+
+	</script>
+
+
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<title>review</title>
+<script type="text/javascript">
+// what are the 7 things that can go in a variable
+
+var nothing = undefined;
+// this is the same var nothing;
+
+var bool = true;
+
+
+var string = "hi";
+
+
+var number = 3.14; 
+
+
+var array = [];
+// numbers is how array works 
+
+//practicing array
+var weatherArray = [
+	5, 20, false 
+
+];
+
+console.log(weatherArray);
+console.log(weatherArray[1]);
+
+// we dont know what those variables are 
+// this is the problem objects solve 
+
+var object = {};
+
+
+var func = function(){};
+// taking code and saving it for later
+// var function = function(argument){}
+// return
+
+//practicing function
+var weather = {
+	temperature : 5, 
+	humidity : 20, 
+	isRaining : false
+
+};
+
+// order does not matter inside of an object 
+
+console.log(weather);
+console.log(weather["humidity"]);
+console.log(weather.humidity);
+
+//console.log is an object so console is the object and log is the function 
+console.log(console);
+console["log"]("hello");
+
+
+// leavel 1: "nyc", "boston"
+// level 2: "temputure"...
+// level 3 for temperature only: array of numbers
+
+var weathers = {
+
+	nyc:{
+		temperature: [5, 9, 1],
+		humidity:  50,
+		isRaining: false
+	}, 
+
+	boston:{ 
+		temperature: [5, 9, 1],
+		humidity:  50,
+		isRaining: false
+	}
+};
+
+console.log(weathers);
+console.log(weathers.boston.temperature[2]);
+
+
+
+
+
+
+
+
+
+
+
+
+</script>

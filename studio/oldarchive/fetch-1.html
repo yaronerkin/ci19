@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<style>
+		html,body{margin: 10px;}
+		.year{font-size: 50px;}
+	</style>
+<script>
+
+var url = "parkour.json";
+var dataArray = [];
+
+var yearArray = ['1997', '1998', '1999', '2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019',];
+var showTheseEntries = [];
+var clickedYear;
+
+//loop thru this array to make the elements in box 1, they're all divs
+//add an event listener to the divs
+
+for(var  i = 0; i < yearArray.length; i++) {
+	
+	var year = yearArray[i];
+	var el = document.createElement('div');
+	el.innerHTML = year; 
+	el.classList.add('year');
+
+	//append it to a container/box 1;
+	//doucment.getElemebtById('box1').appendChild(el);
+	//either use flexbox or display inline block, you might want to align the text to center, make the width of each yearbox 33%
+
+	document.body.appendChild(el);
+
+	el.addEventListener('click', function(e){
+		//clear content in box2
+		//document.getElementById('box2').innerHTML = "";
+		clickedYear = e.srcElement.innerText;
+		parseData(clickedYear);
+	});
+
+	
+
+	//writing a function that finds all of the entries in your dataArray that have the date you clicked on 
+}
+
+function parseData(year) {
+	console.log(year);
+
+	//loop thru dataArray 
+	//if the entry's year equals clicked year then create and element to add to box 2 
+
+	for(var i = 0; i < dataArray.length; i++) {
+		var entry = dataArray[i];
+
+		//console.log(entry.Year);
+		//**use this to check code**
+
+		//if the entry year equals the clicked year, do things (make new element, put it in box2)
+
+		if(entry.Year == year) {
+
+			var name = entry.Name; 
+
+			var el = document.createElement('div');
+			el.innerHTML = name;
+			el.classList.add('name');
+
+			//should be box 2
+			document.body.appendChild(el);
+
+			//add event listener to the name that would show the creator 
+
+			//el.addEventListener(click, function(e){
+			console.log(entry);
+			//	console.log(entry.Creator); 
+
+				//make an elment in box 3 for the creators 
+				//once you create the crator add an event listener to that which creates the video in box 3
+			//}); 
+
+	
+		}
+	}
+}
+
+fetch(url)
+	.then(function(response){return response.json();})
+	.then(function(json){buildPage(json);})
+
+function buildPage(data) {
+	dataArray = data;
+}
+
+//NEXT STEPS
+
+//clean up JSON *** DONE ***
+
+//create boxes and change all the places where you appendChild to the box, not the body, make sure you use ID's instead of classes for the boxes 
+
+//when you click on a year (in the event listener) clear the box (innHTML = "") before you run the function parse trends 
+
+//basically repeat what you did for the year for the name in order to show the creator, then do the same for the creator to should the video 
+
+</script>
+</body>
+</html>

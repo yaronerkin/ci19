@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<script type="text/javascript">
+		
+
+		// load our json file.
+var url = "https://raw.githubusercontent.com/robbykraft/Core-Interaction/master/lab/09/water.json"
+fetch(url)
+	.then(function(response){return response.json();})
+	.then(function(json){buildPage(json);})
+
+
+function buildPage(date){
+	for(var i = 0; i = data.length; i = i + 1){
+		var kind = document.createElement("h1")
+		var oz = document.createElement("h2")
+		var time = document.createElement("h3")
+		document.body.appendChild(kind);
+		document.body.appendChild(oz);
+		document.body.appendChild(time);
+		kind.innerHTML = data[i].kind;
+		oz.innerHTML = data[i].oz + " ounces";
+		time.innerHTML = data[i].time;
+
+		var line = document.createElement("hr");
+		document.body.appendChild(line);
+
+
+		if(data[i].kind == "coffee"){
+			kind.style.color = "brown";
+		}
+
+		if(data[i].kind == "water"){
+			kind.style.color = "turquoise";
+		}
+
+	}
+}
+
+
+	</script>
+
+</body>
+</html>

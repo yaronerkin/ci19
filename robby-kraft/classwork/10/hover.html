@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<script type="text/javascript">
+	
+var url = "https://raw.githubusercontent.com/dariusk/corpora/master/data/geography/us_cities.json"
+		
+fetch(url)
+			
+.then(function(data){return data.json();})
+.then(function(json){sortData(json);})
+
+var pop = document.createElement("h1");
+document.body.appendChild(pop);
+
+function sortData(json){
+	var cities = json.cities
+	for (var i = o; i < cities.length; i+=){
+		var cities = document.createElement("h1");
+		document.body.appendChild(city);
+		city.onmouseover = function(event){
+		pop.innerHTML = cities[event.target.counter].population;
+		//pop.style.top = event.target.style.top;
+		//pop.style.left = event.target.style.left;
+		}
+	}
+}
+
+</script>
+
+</body>
+</html>

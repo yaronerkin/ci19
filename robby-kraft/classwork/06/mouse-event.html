@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+<style type="text/css">
+	
+/*  this makes a circle (size 50px, and position absolute)*/
+	div{
+		position: absolute;
+		width: 50px;
+		height: 50px;
+		border-radius: 25px;
+		background-color: rgba(0,0,0,0.1);
+		margin-left: -25px;
+		margin-top: -25px;
+	}
+
+
+</style>
+</head>
+<body>
+<script type="text/javascript">
+
+
+// makes a function that has an eveent when the mouse moves
+document.onmousemove = function(event){
+	
+	// shows if the mouse works 
+	console.log(event);
+	//creates a div
+	var div = document.createElement("div");
+	//styles the div
+	div.style.top = event.y + "px";
+	div.style.left = event.x + "px";
+	document.body.appendChild(div);
+}
+	
+</script>
+
+</body>
+</html>

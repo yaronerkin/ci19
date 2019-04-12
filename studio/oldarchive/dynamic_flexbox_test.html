@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		@import "compass/css3";
+
+$color1: #343e3d;
+$color2: #607466;
+$color3: #aedcc0;
+$color4: #7bd389;
+$color5: #38e4ae;
+
+body {
+    color: $color1;
+    font-family: 'Varela Round', 'Helvetica', sans-serif;
+}
+p { line-height: 24px; margin-top: 0; }
+h1 { margin: 6px 0 24px; }
+ul { margin: 0; padding: 0 0 0 1em; }
+li {  line-height: 24px; }
+.icon { font-size: 16px; margin: 0 5px; }
+.icon-big {
+    font-size: 32px;
+    border: 2px dashed $color4;
+    color: $color4;
+    padding: 10px 11px 10px 10px;
+}
+* { box-sizing: border-box; }
+
+// **********************************************************************
+// layout styles
+// **********************************************************************
+$spacing: 14px;
+$footer-height: 70px;
+html, body { height: 100%; overflow: hidden; }
+nav {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 2.5em 1.75em;
+    background: #fff;
+    width: 260px;
+    max-width: 300px;
+    min-width: 165px;
+}
+main {
+    display: flex;
+    height: 100%;
+    padding-bottom: $footer-height;
+    background: #fff;
+}
+.content {
+    flex: 1;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-around;
+    align-content: space-around;
+    padding: $spacing/2;
+}
+.row {
+    min-height: 50px;
+    flex: 1;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    align-content: space-around;
+    &.resizable {
+        flex: 0 0 300px;
+    }
+}
+section {
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 1.25em 1.75em;
+    background: #ddd;
+    border: $spacing/2 solid #fff;
+    flex: 1;
+    min-width: 30px;
+    &.resizable {
+        flex: 0 0 300px;
+    }
+}
+#one { background: $color4; color: darken($color4, 30); }
+#two { background: $color3; color: darken($color3, 30); }
+#three { background: $color5; color: darken($color5, 30); }
+#four { background: url(http://publicdomainarchive.com/wp-content/uploads/2014/12/public-domain-images-free-stock-photos-high-quality-resolution-downloads-public-domain-archive-7-1000x665.jpg); }
+footer {
+    background: white;
+    position: relative;
+    z-index: 1;
+    font-size: 14px;
+    text-transform: uppercase;
+    padding: 0 1.75em;
+    width: 100%;
+    margin-top: 0 - $footer-height;
+    height: $footer-height;
+    line-height: $footer-height;
+    border-top: 1px solid $color3;
+    a {
+        position: relative;
+        text-decoration: none;
+        color: $color4;
+        &:after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            width: 0;
+            height: 1px;
+            background-color: $color4;
+            @include transition(all .3s ease-in-out);
+        }
+        &:hover {
+            &:after {
+                width: 100%;
+            }
+        }
+    }
+}
+
+
+// **********************************************************************
+// directive styles
+// **********************************************************************
+.resizable {
+    position: relative;
+    &.no-transition {
+        transition: none !important;
+    }
+}
+.rg-right, .rg-left, .rg-top, .rg-bottom {
+    display: block;
+    width: $spacing; height: $spacing; line-height: $spacing;
+    position: absolute;
+    z-index: 1;
+    @include user-select(none);
+    span {
+        position: absolute;
+        box-sizing: border-box;
+        display: block;
+        border: 1px solid #ccc;    
+    }
+}
+.rg-right, .rg-left {
+    span {
+        border-width: 0 1px;
+        top: 50%; margin-top: -10px;
+        margin: -10px 0 0 $spacing/4;
+        height: 20px;
+        width: $spacing/2;
+    }
+}
+.rg-top, .rg-bottom {
+    span {
+        border-width: 1px 0;
+        left: 50%;
+        margin: $spacing/4 0 0 -10px;
+        width: 20px;
+        height: $spacing/2;
+    }
+}
+.rg-top     {
+    cursor: row-resize;
+    width: 100%;
+    top: 0;
+    left: 0;
+    margin-top: -$spacing/2;
+}
+.rg-right   {
+    cursor: col-resize;
+    height: 100%;
+    right: 0;
+    top: 0;
+    margin-right: -$spacing;
+}
+.rg-bottom  {
+    cursor: row-resize;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    margin-bottom: -$spacing/2;
+}
+.rg-left    {
+    cursor: col-resize;
+    height: 100%;
+    left: 0;
+    top: 0;
+    margin-left: -$spacing;
+}
+
+
+	</style>
+</head>
+<body>
+<script type="text/javascript">
+	
+angular.module('angularResizable', [])
+    .directive('resizable', function() {
+        var toCall;
+        function throttle(fun) {
+            if (toCall === undefined) {
+                toCall = fun;
+                setTimeout(function() {
+                    toCall();
+                    toCall = undefined;
+                }, 100);
+            } else {
+                toCall = fun;
+            }
+        }
+        return {
+            restrict: 'AE',
+            scope: {
+                rDirections: '=',
+                rCenteredX: '=',
+                rCenteredY: '=',
+                rWidth: '=',
+                rHeight: '=',
+                rFlex: '=',
+                rGrabber: '@',
+                rDisabled: '@'
+            },
+            link: function(scope, element, attr) {
+                var flexBasis = 'flexBasis' in document.documentElement.style ? 'flexBasis' :
+                    'webkitFlexBasis' in document.documentElement.style ? 'webkitFlexBasis' :
+                    'msFlexPreferredSize' in document.documentElement.style ? 'msFlexPreferredSize' : 'flexBasis';
+
+                // register watchers on width and height attributes if they are set
+                scope.$watch('rWidth', function(value){
+                    element[0].style.width = scope.rWidth + 'px';
+                });
+                scope.$watch('rHeight', function(value){
+                    element[0].style.height = scope.rHeight + 'px';
+                });
+
+                element.addClass('resizable');
+
+                var style = window.getComputedStyle(element[0], null),
+                    w,
+                    h,
+                    dir = scope.rDirections,
+                    vx = scope.rCenteredX ? 2 : 1, // if centered double velocity
+                    vy = scope.rCenteredY ? 2 : 1, // if centered double velocity
+                    inner = scope.rGrabber ? scope.rGrabber : '<span></span>',
+                    start,
+                    dragDir,
+                    axis,
+                    info = {};
+
+                var updateInfo = function(e) {
+                    info.width = false; info.height = false;
+                    if(axis === 'x')
+                        info.width = parseInt(element[0].style[scope.rFlex ? flexBasis : 'width']);
+                    else
+                        info.height = parseInt(element[0].style[scope.rFlex ? flexBasis : 'height']);
+                    info.id = element[0].id;
+                    info.evt = e;
+                };
+
+                var dragging = function(e) {
+                    var prop, offset = axis === 'x' ? start - e.clientX : start - e.clientY;
+                    switch(dragDir) {
+                        case 'top':
+                            prop = scope.rFlex ? flexBasis : 'height';
+                            element[0].style[prop] = h + (offset * vy) + 'px';
+                            break;
+                        case 'bottom':
+                            prop = scope.rFlex ? flexBasis : 'height';
+                            element[0].style[prop] = h - (offset * vy) + 'px';
+                            break;
+                        case 'right':
+                            prop = scope.rFlex ? flexBasis : 'width';
+                            element[0].style[prop] = w - (offset * vx) + 'px';
+                            break;
+                        case 'left':
+                            prop = scope.rFlex ? flexBasis : 'width';
+                            element[0].style[prop] = w + (offset * vx) + 'px';
+                            break;
+                    }
+                    updateInfo(e);
+                    throttle(function() { scope.$emit('angular-resizable.resizing', info);});
+                };
+                var dragEnd = function(e) {
+                    updateInfo();
+                    scope.$emit('angular-resizable.resizeEnd', info);
+                    scope.$apply();
+                    document.removeEventListener('mouseup', dragEnd, false);
+                    document.removeEventListener('mousemove', dragging, false);
+                    element.removeClass('no-transition');
+                };
+                var dragStart = function(e, direction) {
+                    dragDir = direction;
+                    axis = dragDir === 'left' || dragDir === 'right' ? 'x' : 'y';
+                    start = axis === 'x' ? e.clientX : e.clientY;
+                    w = parseInt(style.getPropertyValue('width'));
+                    h = parseInt(style.getPropertyValue('height'));
+
+                    //prevent transition while dragging
+                    element.addClass('no-transition');
+
+                    document.addEventListener('mouseup', dragEnd, false);
+                    document.addEventListener('mousemove', dragging, false);
+
+                    // Disable highlighting while dragging
+                    if(e.stopPropagation) e.stopPropagation();
+                    if(e.preventDefault) e.preventDefault();
+                    e.cancelBubble = true;
+                    e.returnValue = false;
+
+                    updateInfo(e);
+                    scope.$emit('angular-resizable.resizeStart', info);
+                    scope.$apply();
+                };
+
+                dir.forEach(function (direction) {
+                    var grabber = document.createElement('div');
+
+                    // add class for styling purposes
+                    grabber.setAttribute('class', 'rg-' + direction);
+                    grabber.innerHTML = inner;
+                    element[0].appendChild(grabber);
+                    grabber.ondragstart = function() { return false; };
+                    grabber.addEventListener('mousedown', function(e) {
+                        var disabled = (scope.rDisabled === 'true');
+                        if (!disabled && e.which === 1) {
+                            // left mouse click
+                            dragStart(e, direction);
+                        }
+                    }, false);
+                });
+            }
+        };
+    });
+
+
+
+</script>
+
+<body ng-app="angularResizable">
+    <main>
+        <nav resizable r-directions="['right']">
+            <span class="icon-big icon_expand-1"></span>
+            <br /><br />
+            <h1>
+              Angular
+              Resizable
+            </h1>
+            <p>
+              A teensy weensy directive for creating resizable containers.
+            </p>
+        </nav>
+        <div class="content">
+            <div class="row" resizable r-directions="['bottom']" r-flex="true">
+                <section id="one" resizable r-directions="['right']" r-flex="true">
+                    <p>Works with flexbox.</p>
+                </section>
+                <section id="two">
+                    <p>2</p>
+                </section>
+            </div>
+            <div class="row">
+                <section id="three" resizable r-directions="['right']" r-flex="true">
+                    <p>Completely seperates <strong>layout logic</strong> from <strong>resize logic</strong>. All layout logic must be done by you in the CSS (as it should be).</p>
+                </section>
+                <section id="four">4</section>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <span>
+            Made with <span class="icon icon_coffee"></span> by
+            <a href="https://codepen.io/Reklino/" target="_blank">
+                <span class="icon icon_jacob"></span>
+            </a>
+        </span>
+        <span style="float: right">
+        <a href="https://github.com/Reklino/angular-resizable" target="_blank">
+            Fork it on GitHub <span class="icon icon_code"></span>
+        </a>
+        </span>
+    </footer>
+</body>
+
+</body>
+</html>

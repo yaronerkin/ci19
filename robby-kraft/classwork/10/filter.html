@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<script type="text/javascript">
+		
+		var url = "https://raw.githubusercontent.com/dariusk/corpora/master/data/geography/us_cities.json"
+		
+		fetch(url)
+			
+			.then(function(data){return data.json();})
+			.then(function(json){sortData(json);})
+
+		function sortData(json) {
+			
+			//*old* console.log(json);
+			var array = json.cities;
+			console.log(array);
+
+			//cali is going to be an array
+			//on each element .state == "California"
+			var cali = array.filter(function(el){ return el.state == "California"; });
+			console.log(cali);
+
+			var texas = array.filter(function(entry){ return entry.state == "Texas"; });
+			console.log(texas);
+
+			var pop = array.filter(function(a){ return a.population >= 1000000; })
+			console.log(pop)
+
+			/////////////////////////////////
+
+			// sort does modift the original array
+			// javascript knows that its in alphabetical order 
+			array.sort(function(a,b){
+				if (a.city < b.city) return -1;
+				if (b.city < a.city) return 1;
+				return 0;
+			});
+
+			console.log(array)
+
+		}
+
+	</script>
+</body>
+</html>

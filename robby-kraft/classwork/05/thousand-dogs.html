@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+</head>
+<body>
+<style type="text/css">
+
+
+	
+html,body{
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	margin: 0;
+
+}
+
+
+</style>
+
+<script type="text/javascript">
+	
+var header = document.createElement("header");
+console.log(header);
+
+//puts it on the page
+document.body.appendChild(header);
+
+//inner html is the space between opening and closing tags 
+header.innerHTML = "ONE THOUSAND DOGS";
+
+
+var counter = 0;
+
+while(counter < 1000){
+
+	var p = document.createElement("span");
+	p.innerHTML = "🐶";
+	document.body.appendChild(p); 
+
+	counter = counter + 1;
+}
+
+</script>
+</body>
+</html>

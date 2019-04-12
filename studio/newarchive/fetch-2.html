@@ -2,39 +2,78 @@
 <html>
 <head>
 	<title></title>
+	<style type="text/css"></style>
 </head>
-<style>
-	h3{
-		margin: 0px;
-	}
-</style>
 <body>
-<header id="head"></header>
-<script>
+<script type="text/javascript">
+	
+var url = "https://raw.githubusercontent.com/yaronerkin/ci19/master/studio/newarchive/parkour.json"
 
-var url = "https://raw.githubusercontent.com/eddiedohyunkim/ci19/master/lab/classwork/09/lottery.json"
+var yearArray = ['1997', '1998', '1999', '2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019',];
+
 fetch(url)
-	.then(function(response){return response.json();})
-	.then(function(json){buildPage(json);})
+	.then(function(data){return data.json();})
+	.then(function(json){sortData(json);})
+
+function sortData(json) {
+	console.log(json);
+	
+	// year
+
+	var year1997 = json.filter(function(el){ return el.Year == "1997"; });
+	console.log(year1997);
+	
+	var year1998 = json.filter(function(el){ return el.Year == "1998"; });
+	console.log(year1998);
+	
+	var year1999 = json.filter(function(el){ return el.Year == "1999"; });
+	console.log(year1999);
+	
+	var year2000 = json.filter(function(el){ return el.Year == "2000"; });
+	console.log(year2000);
+	
+	var year2001 = json.filter(function(el){ return el.Year == "2001"; });
+	console.log(year2001);
+	
+	var year2002 = json.filter(function(el){ return el.Year == "2002"; });
+	console.log(year2002);
+	
+	var year2003 = json.filter(function(el){ return el.Year == "2003"; });
+	console.log(year2003);
+	
+	var year2004 = json.filter(function(el){ return el.Year == "2004"; });
+	console.log(year2004);
+	
+	var year2005 = json.filter(function(el){ return el.Year == "2005"; });
+	console.log(year2005);
+	
+	var year2006 = json.filter(function(el){ return el.Year == "2006"; });
+	console.log(year2006);
+	
+	var year2007 = json.filter(function(el){ return el.Year == "2007"; });
+	console.log(year2007);
+	
+	var year2008 = json.filter(function(el){ return el.Year == "2008"; });
+	console.log(year2008);
+
+
+	
+	// country
 
 
 
-function buildPage(data) {
 
-	for (var i = 0; i < data.length; i += 1){
-		var event = document.createElement("h3");
-		var date = document.createElement("h3");
-		var winner = document.createElement("h3");
 
-		document.body.appendChild(event);
-		document.body.appendChild(date);
-		document.body.appendChild(winner);
 
-		event.innerHTML = "event : " + data[i].event;
-		date.innerHTML = "date : " + data[i].date;
-		winner.innerHTML = "winners : " + data[i].winner;
-		
+	var france = json.filter(function(el){ return el.Country == "France "; });
+	console.log(france);
+
 }
+
+
+
+
+
 </script>
 </body>
 </html>
