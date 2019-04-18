@@ -1,61 +1,130 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
-	<style type="text/css">
+<title></title>
+<style type="text/css">
+
+	html,body{
+		margin: 0;
+		padding: 0;
+	}
 	
 	.menu{
 		display: inline-block;
+		font-family: Helvetica, Sans-Serif;
+		font-weight: bold;
+		font-size: 18pt;
+		margin-left: 2em;
+		margin-top: .6em;
 	}	
-
-	.subcatagory{
-		display: inline-block;
-		padding: 2px;
-		text-decoration: none;
-		background-color: none;
-		border:none;
-	}
 
 	#search{
 	float: right;
 	border: none;
+	position: relative;
+	text-decoration: black;
 	}
 
-	</style>
+	#catagory-year{
+	position: fixed;
+	position: right 3em;
+	}
+
+	#catagory-starred{
+	position: fixed;
+	left: 6em;
+	}
+
+	#scrolling{
+	font-family: Helvetica, Sans-Serif;
+	font-size: 18pt;
+	margin-top: .6em;
+	}
+
+	.year-selection{
+	display: inline-block;
+	font-family: Helvetica, Sans-Serif;
+	font-size: 14pt;
+	color: black;
+	padding-right: .2em;
+	margin-top: .5em;
+
+	}
+
+
+</style>
 </head>
 <body>
 
-<marquee behavior="scroll" direction="right">description</marquee>
-<div class="menu" id="catagory-year">years</div>
-<div class="menu" id="catagory-starred">starred</div>
-<input class="menu" id="search" type="text" placeholder="Search..">
+<marquee id="scrolling" behavior="scroll" direction="left"> the official parkour archive.  showing impactful, influential and historic videos from the begining of online parkour videos to the current ones. the official parkour archive.  showing impactful, influential and historic videos from the begining of online parkour videos to the current ones. the official parkour archive.  showing impactful, influential and historic videos from the begining of online parkour videos to the current ones. </marquee>
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1785 2"><defs><style>.cls-1{fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:2px;}</style></defs><title>Asset 1</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><line class="cls-1" x1="1785" y1="1" y2="1"/></g></g></svg>
+
+<div class="menu" id="catagory-year">years
+	<p> </p>
+</div>
 
 
-<ul class="subcatagory">
-  <button class="subcatagory">1997</button>
-  <button class="subcatagory">1998</button>
-  <button class="subcatagory">1999</button>
-  <button class="subcatagory">2000</button>
-  <button class="subcatagory">2001</button>
-  <button class="subcatagory">2002</button>
-  <button class="subcatagory">2003</button>
-  <button class="subcatagory">2004</button>
-  <button class="subcatagory">2005</button>
-  <button class="subcatagory">2006</button>
-  <button class="subcatagory">2007</button>
-  <button class="subcatagory">2008</button>
-  <button class="subcatagory">2009</button>
-  <button class="subcatagory">2010</button>
-  <button class="subcatagory">2011</button>
-  <button class="subcatagory">2012</button>
-  <button class="subcatagory">2013</button>
-  <button class="subcatagory">2014</button>
-  <button class="subcatagory">2015</button>
-  <button class="subcatagory">2016</button>
-  <button class="subcatagory">2017</button>
-  <button class="subcatagory">2018</button>
-  <button class="subcatagory">2019</button>
-</ul class="subcatagory">  
+<div  class="menu" id="catagory-starred">starred</div>
+
+<input class="menu" id="search" type="text" placeholder="search bar">
+
+
+<script>
+document.getElementById("catagory-year").onclick = function() {myFunction()};
+
+function myFunction() {
+	year1997 = document.getElementById("year.1997") 
+	if  (year1997 == null){
+		for ( var year = 1997; year <=2019; year = year+ 1){
+			
+			var date = document.createElement("div");
+			date.setAttribute("id", "year."+year);
+			date.setAttribute("class", "year-selection");
+			date.innerHTML = year;             
+			parent = document.getElementById("catagory-year")    
+			parent.appendChild(date);         
+			date.onclick = function() {onYear(year)};
+		}
+	}else{
+		// delete exisitng elements with id "year.1997", "year.1998"...
+	}
+}
+
+function onYear(year){
+	console.log("present videos for this year", year)
+}
+
+</script>
+
+
+
+
+<!-- <ul class="subcatagory"> -->
+<!--   <div class="subcatagory">1997</div> -->
+<!--   <div class="subcatagory">1998</div> -->
+<!--   <div class="subcatagory">1999</div> -->
+<!--   <div class="subcatagory">2000</div> -->
+<!--   <div class="subcatagory">2001</div> -->
+<!--   <div class="subcatagory">2002</div> -->
+<!--   <div class="subcatagory">2003</div> -->
+<!--   <div class="subcatagory">2004</div> -->
+<!--   <div class="subcatagory">2005</div> -->
+<!--   <div class="subcatagory">2006</div> -->
+<!--   <div class="subcatagory">2007</div> -->
+<!--   <div class="subcatagory">2008</div> -->
+<!--   <div class="subcatagory">2009</div> -->
+<!--   <div class="subcatagory">2010</div> -->
+<!--   <div class="subcatagory">2011</div> -->
+<!--   <div class="subcatagory">2012</div> -->
+<!--   <div class="subcatagory">2013</div> -->
+<!--   <div class="subcatagory">2014</div> -->
+<!--   <div class="subcatagory">2015</div> -->
+<!--   <div class="subcatagory">2016</div> -->
+<!--   <div class="subcatagory">2017</div> -->
+<!--   <div class="subcatagory">2018</div> -->
+<!--   <div class="subcatagory">2019</div> -->
+<!-- </ul class="subcatagory">   -->
 
 <script type="text/javascript">
 	
