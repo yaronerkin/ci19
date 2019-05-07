@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<div id="container"></div>
+<script type="text/javascript">
+	
+var url = "https://api.citybik.es/v2/networks/citi-bike-nyc";
+var lat =  40.7352;
+var lon = -73.9943;
+var saved = [];
+
+function callAPI() {
+	fetch(url)
+		.then(function(event){return event.json();})
+		.then(function(json){ buildApp(json);})
+		console.log("call api");
+}
+
+
+
+function distance(lat1, lon1, lat2, lon2){
+	return Math.sqrt(Math.pow(lat1-lat2, 2) + Math.pow(lon1-lon2, 2));
+}
+
+function buildApp(json){
+	let stations =json.network.stations
+	stations.sort( function(a,b){
+		return distance(a.latitude, a.longitude, lat, lon) - 
+		       distance(b.latitude, b.longitude, lat, lon); 
+		});
+	let nearest = stations.slice(0,20);
+	console.log(nearest);
+
+
+
+document.querySelector("#container").remove();
+let container = document.createElement("div");
+container.setAttribute("id", "container");
+document.body.appendChild(container);
+
+
+for(let i = 0; i < nearest.length; i = i+1){
+	if(saved[i] == undefined){
+	   saved[i] = [nearest[i].free_bikes];
+	}
+  }
+
+for(let i = 0; i < nearest.length; i = i+1){
+	let diff = nearest[i].free_bikes - saved[i][0];
+	let diffString = diff > 0 ? "+"+diff :diff;
+	let color = diff > 0 ? "#0D0" : "#F00";
+	diffString = "<span style='color:"+color+"'>" + diffString + "</span>";
+	let change = diff == 0 ? "" : " "+diffString; 
+	// this line  is going to change if the first statement is true or false 
+	// if this is true of false do one or the other 
+	// if the bikes are true give back and empty string 
+	// if the bikes amount has changed add a negative or positive number 
+
+
+	let h1 = document.createElement("h1");
+	h1.innerHTML = nearest[i].name;
+	let h2 = document.createElement("h2");
+	h2.innerHTML = nearest[i].free_bikes + change;
+	container.appendChild(h1);
+	container.appendChild(h2);
+  }
+
+}
+
+
+/// run the app
+
+callAPI();
+
+setInterval(callAPI, 60000);
+
+</script>
+
+</body>
+</html>

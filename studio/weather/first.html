@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<style type="text/css">
+
+
+
+
+html, body {
+		margin: 0px;
+
+		background-color: darkgrey;
+
+	}
+	canvas {
+		display: block;
+	}
+
+	
+</style>
+</head>
+<body>
+<script type="text/javascript">
+
+
+
+//variable list
+var url = "https://cors.io/?https://api.darksky.net/forecast/01571adc542f65fd58a88b4e193ca0fe/40.735224,-73.994373";	
+var temp = [];
+var speed = [];
+var direction = [];
+
+
+//apply the api
+function processAPI(json){
+	console.log(json);
+	console.log(json.currently.temperature);
+	console.log(json.currently.windSpeed);
+	console.log(json.currently.windBearing);
+
+}
+
+//access the api 
+function callAPI(json){
+	fetch(url)
+		.then(function(event){return event.json();})
+		.then(function(json){ processAPI(json);})
+		;
+}
+
+
+//call the api
+callAPI();
+//setInterval(callAPI, 10000);
+
+
+
+
+</script>
+
+<canvas id="canvas"></canvas>
+
+
+
+
+</body>
+</html>

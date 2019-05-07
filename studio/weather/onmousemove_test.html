@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+  width: 750px;
+  height: 750px;
+  border: 1px solid black;
+}
+</style>
+</head>
+<body>
+
+<body onmousemove="myFunction(event)" onmouseout="clearCoor()"></body>
+
+
+<p id="pointer"></p>
+
+<script>
+function myFunction(e) {
+  var x = e.clientX;
+  var y = e.clientY;
+  var coor = "COORDINATES: (" + x + "," + y + ")";
+  document.getElementById("pointer").innerHTML = coor;
+}
+
+function clearCoor() {
+  document.getElementById("pointer").innerHTML = "";
+}
+</script>
+
+</body>
+</html>
